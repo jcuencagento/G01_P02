@@ -1,6 +1,10 @@
 package com.grupo01.spring.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.grupo01.spring.model.Game;
+
 
 /**
  * 
@@ -9,6 +13,6 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface GameDAO {
+public interface GameDAO extends JpaRepository<Game, Integer>{
 
 }

@@ -4,6 +4,7 @@ package com.grupo01.spring.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 
@@ -12,6 +13,7 @@ import javax.persistence.Id;
  */
 
 @Entity
+@Table(name="gametable")
 public class Game {
 	
 	@Id
