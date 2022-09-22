@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos.css}" />
+
+<title>Game Database</title>
+</head>
+<body>
+
+	<div class="container">
+
+		<h1> THE 8th ART! <br/></h1>
+
+		<h2>GAME DATABASE</h2>
+		
+		<p>
+			<a href="/new" class="btn btn-primary">New movie</a>
+		</p>
+
+		<table class="table table-striped">
+			<tr>
+				<th>Rank</th>
+				<th>Name</th>
+				<th>Platform</th>
+				<th>Year</th>
+				<th>Genre</th>
+				<th>Publisher</th>
+				<th>Sales Europe</th>
+				<th>Options</th>
+				
+			</tr>
+			<tr th:each="game, status : ${gameList}">
+				<td th:text="${game.Rank}" />
+				<td th:text="${game.Name}" />
+				<td th:text="${game.Platform}" />
+				<td th:text="${game.Year}" />
+				<td th:text="${game.Genre}" />
+				<td th:text="${game.Publisher}" />
+				<td th:text="${game.EU_Sales}" />
+				
+				<td><a th:href="@{/edit(Rank=${game.Rank})}">Modify</a> | <a
+					th:href="@{/delete(Rank=${game.Rank})}">Delete</a></td>
+			</tr>
+
+		</table>
+		
+	</div>
+</body>
+</html>
