@@ -24,4 +24,12 @@ public class GameServiceImpl implements GameService{
 		return gameDAO.findAll();
 	}
 
+	
+	
+	
+	
+	
+	public void saveGame(Game game) {
+		gameDAO.save(game);
+	}
 }

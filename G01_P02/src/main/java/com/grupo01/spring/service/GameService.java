@@ -12,4 +12,13 @@ import com.grupo01.spring.model.Game;
 
 public interface GameService {
 	public List<Game> findAll();
+	
+	
+	
+	
+	
+	
+	
+	public void saveGame(Game game);
+
 }
