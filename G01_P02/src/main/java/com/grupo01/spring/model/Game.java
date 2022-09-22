@@ -18,7 +18,7 @@ public class Game {
 	
 	@Id
 	@Column(name="Rank")
-	private int Rank;
+	private int id;
 	private String Name;
 	private String Platform;
 	private int Year;
@@ -30,12 +30,12 @@ public class Game {
 	private double Other_Sales;
 	private double Global_Sales;
 	
-	public int getRank() {
-		return Rank;
+	public int getId() {
+		return id;
 	}
 
-	public void setRank(int Rank) {
-		this.Rank = Rank;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -124,7 +124,7 @@ public class Game {
 
 	@Override
 	public String toString() {
-		return "Game [Rank=" + Rank + ", Name=" + Name + ", Platform=" + Platform + ", Year=" + Year + ", Genre="
+		return "Game [Rank=" + id + ", Name=" + Name + ", Platform=" + Platform + ", Year=" + Year + ", Genre="
 				+ Genre + ", Publisher=" + Publisher + ", NA_Sales=" + NA_Sales + ", EU_Sales=" + EU_Sales
 				+ ", JP_Sales=" + JP_Sales + ", Other_Sales=" + Other_Sales + ", Global_Sales=" + Global_Sales + "]";
 	}

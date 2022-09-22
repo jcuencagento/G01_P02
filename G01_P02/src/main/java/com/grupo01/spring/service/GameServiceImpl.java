@@ -32,8 +32,8 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public Optional<Game> findById(int Rank) {
-		return gameDAO.findById(Rank);
+	public Optional<Game> findById(int id) {
+		return gameDAO.findById(id);
 	}
   
 }

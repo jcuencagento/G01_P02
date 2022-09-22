@@ -32,7 +32,7 @@
 				
 			</tr>
 			<tr th:each="game, status : ${gameList}">
-				<td th:text="${game.Rank}" />
+				<td th:text="${game.id}" />
 				<td th:text="${game.Name}" />
 				<td th:text="${game.Platform}" />
 				<td th:text="${game.Year}" />
@@ -40,8 +40,8 @@
 				<td th:text="${game.Publisher}" />
 				<td th:text="${game.EU_Sales}" />
 				
-				<td><a th:href="@{/edit(Rank=${game.Rank})}">Modify</a> | <a
-					th:href="@{/delete(Rank=${game.Rank})}">Delete</a></td>
+				<td><a th:href="@{/edit(id=${game.id})}">Modify</a> | <a
+					th:href="@{/delete(id=${game.id})}">Delete</a></td>
 			</tr>
 
 		</table>
