@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos.css}" />
+
+<title>GameForm</title>
+</head>
+<body>
+
+	<div class="container">
+		<h1>
+			<br />GameForm
+		</h1>
+		<div align="center">
+			<h2>GAME FORM (add/edit)</h2>
+
+			<form method="post" th:object="${game}" th:action="@{/save}">
+				<input id="Rank" th:field="*{Rank}" type="hidden" />
+				<table>
+					<tr>
+						<td><label for="Name">Name:</label></td>
+						<td><input type="text" th:field="*{Name}" /></td>
+					</tr>
+					<tr>
+						<td><label for="Platform">Platform:</label></td>
+						<td><input type="text" th:field="*{Platform}" /></td>
+					</tr>
+					<tr>
+						<td><label for="Year">Year:</label></td>
+						<td><input type="number" th:field="*{Year}" /></td>
+					</tr>
+					<tr>
+						<td><label for="Genre">Genre:</label></td>
+						<td><input type="text" th:field="*{Genre}" /></td>
+					</tr>
+					<tr>
+						<td><label for="Publisher">Publisher:</label></td>
+						<td><input type="text" th:field="*{Publisher}" /></td>
+					</tr>
+
+					<tr>
+						<td colspan="2" align="center"><input type="submit"
+							value="Save Game"></td>
+					</tr>
+				</table>
+			</form>
+
+		</div>
+	</div>
+</body>
+</html>
