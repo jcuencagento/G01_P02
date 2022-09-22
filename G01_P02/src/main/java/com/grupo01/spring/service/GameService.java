@@ -16,6 +16,6 @@ public interface GameService {
   
 	public void saveGame(Game game);
   
-	public Optional<Game> findById(int Rank);
+	public Optional<Game> findById(int id);
 
 }
