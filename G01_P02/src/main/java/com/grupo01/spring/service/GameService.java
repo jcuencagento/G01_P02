@@ -28,4 +28,5 @@ public interface GameService {
 	
 	public List<Game> showEurope();
 
+	public List<Game> showEvenYears();
 }

@@ -29,5 +29,7 @@ public interface GameDAO extends JpaRepository<Game, Integer>{
 	@Query("from Game where eu_Sales > (select AVG(eu_Sales) from Game) order by eu_Sales desc")
 	List<Game> listEurope();
 	
+	@Query("from Game where (year %2) = 0 order by year desc")
+	List<Game> showEvenYears();
 
 }

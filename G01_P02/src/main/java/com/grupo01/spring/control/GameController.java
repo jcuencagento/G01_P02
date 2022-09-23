@@ -122,4 +122,10 @@ public class GameController {
 		return "SoldList";
 	}
 	
+	//Games by even years
+	@GetMapping("/even")
+	public String showEvenYears(Model model) {
+		model.addAttribute("evenList", service.showEvenYears());
+		return "EvenYears";
+	}
 }
