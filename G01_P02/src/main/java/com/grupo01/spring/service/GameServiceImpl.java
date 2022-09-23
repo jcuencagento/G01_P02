@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.grupo01.spring.dao.GameDAO;
@@ -28,7 +29,7 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public void save(Game game) {
-		System.out.println("-------SERVICE--------"+game.toString());
+		System.out.println("-------SERVICE--------" + game.toString());
 		gameDAO.save(game);
 	}
 
@@ -41,5 +42,13 @@ public class GameServiceImpl implements GameService {
 	public void deleteById(int id) {
 		gameDAO.deleteById(id);
 	}
-  
+
+	@Override
+	public List<Game> orderYear() {
+		return gameDAO.findAll(sortByYear());
+	}
+
+	private Sort sortByYear() {
+		return Sort.by(Sort.Direction.DESC, "year");
+	}
 }
