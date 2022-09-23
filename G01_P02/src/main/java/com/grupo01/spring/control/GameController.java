@@ -121,10 +121,18 @@ public class GameController {
 		model.addAttribute("listEurope", service.showEurope());
 		return "SoldList";
 	}
+	
+	//Games by even years
+	@GetMapping("/even")
+	public String showEvenYears(Model model) {
+		model.addAttribute("evenList", service.showEvenYears());
+		return "EvenYears";
+
 	//juegos nintendo
 	@GetMapping("/nintendo")
 	public String showNintendo(Model model) {
 		model.addAttribute("listNintendo", service.showNintendo());
 		return "NintendoList";
+
 	}
 }

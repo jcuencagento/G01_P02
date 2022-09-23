@@ -67,9 +67,14 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
+
+	public List<Game> showEvenYears() {
+		return gameDAO.showEvenYears();
+=======
 	public List<Game> showNintendo() {
 		
 		return gameDAO.listNintendo();
+
 	}
 
 	//private Sort sortSXX() {
