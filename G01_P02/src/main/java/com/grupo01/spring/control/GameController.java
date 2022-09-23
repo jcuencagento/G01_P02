@@ -121,5 +121,10 @@ public class GameController {
 		model.addAttribute("listEurope", service.showEurope());
 		return "SoldList";
 	}
-	
+	//juegos nintendo
+	@GetMapping("/nintendo")
+	public String showNintendo(Model model) {
+		model.addAttribute("listNintendo", service.showNintendo());
+		return "NintendoList";
+	}
 }
