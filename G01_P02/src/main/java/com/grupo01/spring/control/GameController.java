@@ -122,6 +122,13 @@ public class GameController {
 		return "SoldList";
 	}
 	
+	//Games by Genre
+	@GetMapping("/genre")
+	public String showGenre(@RequestParam("genre") String genre, Model model) {
+		model.addAttribute("listGenre", service.showGenre(genre));
+		return "GenreList";
+	}
+	
 	//Games by even years
 	@GetMapping("/even")
 	public String showEvenYears(Model model) {
@@ -135,4 +142,5 @@ public class GameController {
 		return "NintendoList";
 
 	}
+  
 }
