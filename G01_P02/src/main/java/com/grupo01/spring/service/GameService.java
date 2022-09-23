@@ -25,5 +25,7 @@ public interface GameService {
 	public List<Game> orderYear();
 	
 	public List<Game> showSXX();
+	
+	public List<Game> showEurope();
 
 }

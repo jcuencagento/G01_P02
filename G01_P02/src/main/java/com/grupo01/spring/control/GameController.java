@@ -115,4 +115,11 @@ public class GameController {
 		return "ListSXX";
 	}
 
+	//Games Europe
+	@GetMapping("/europe")
+	public String showEurope(Model model) {
+		model.addAttribute("listEurope", service.showEurope());
+		return "SoldList";
+	}
+	
 }

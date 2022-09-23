@@ -59,6 +59,13 @@ public class GameServiceImpl implements GameService {
 		return gameDAO.listSXX();
 	}
 	
+	
+	@Override
+	public List<Game> showEurope(){
+		
+		return gameDAO.listEurope();
+	}
+
 	//private Sort sortSXX() {
 	//	return Sort.by("year");
 	//}
