@@ -20,4 +20,6 @@ public interface GameService {
 
 	public void deleteById(int id);
 
+	public List<Game> orderYear();
+
 }
