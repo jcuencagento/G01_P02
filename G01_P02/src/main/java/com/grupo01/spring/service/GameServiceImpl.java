@@ -3,6 +3,7 @@ package com.grupo01.spring.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -51,4 +52,14 @@ public class GameServiceImpl implements GameService {
 	private Sort sortByYear() {
 		return Sort.by(Sort.Direction.DESC, "year");
 	}
+
+	@Override
+	public List<Game> showSXX() {
+		
+		return gameDAO.listSXX();
+	}
+	
+	//private Sort sortSXX() {
+	//	return Sort.by("year");
+	//}
 }

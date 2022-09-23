@@ -106,5 +106,13 @@ public class GameController {
 		model.addAttribute("yearList", service.orderYear());
 		return "YearList";
 	}
+	
+	
+	//Order by year <2000 && >1900
+	@GetMapping("/sxx")
+	public String showSigloXX(Model model) {
+		model.addAttribute("listSXX", service.showSXX());
+		return "ListSXX";
+	}
 
 }
