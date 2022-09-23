@@ -81,15 +81,82 @@ footer{
 }
 
 
-.links{
-	position:fixed;
- 	width:50%;
-  	margin-left: 20px;
-  	margin-top: 20px;
-  	margin-bottom: 20px;
-  	padding: 20px;
-}
-
 body{
 	background-color: #dddddd;
+	padding-top: 3%;
 }
+
+/* PARTE DE NAVEGADOR */
+
+.cabecero{
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: fit-content;
+	background-color: #225f69;
+	border: 1px solid #484848;
+}
+
+#gestion{
+  background-color: #225f69;
+  color: #ddd;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.nav {
+  justify-content: center;
+  text-align: center;
+  background-color: #225f69;
+  font-style: italic;
+  font-weight: 800;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+#gestion{
+	width: fit-content;
+	background-color: #225f69;
+	text-decoration: none;
+	color: #ddd;
+	padding: 10px 15px;
+	display: block;
+}
+
+.princ li a, #opciones {
+  background-color: #225f69;
+  text-decoration: none;
+  color: #ddd;
+  padding: 10px 15px;
+  display: block;
+}
+
+.princ li a:hover, #gestion:hover {
+  background-color: rgb(68, 66, 66);
+}
+
+.princ > li {
+  float: left;
+}
+
+.princ li ul {
+  display: none;
+  position: absolute;
+  min-width: 100px;
+}
+
+.princ li:hover > ul {
+  display: block;
+}
+
+.princ li ul li {
+	position: relative;
+}
+
+.princ li ul li ul {
+	right: -46%;
+	top: 0px;
+}
+
