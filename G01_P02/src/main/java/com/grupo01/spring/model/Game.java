@@ -19,16 +19,26 @@ public class Game {
 	@Id
 	@Column(name="Rank")
 	private int id;
-	private String Name;
-	private String Platform;
-	private int Year;
-	private String Genre;
-	private String Publisher;
-	private double NA_Sales;
-	private double EU_Sales;
-	private double JP_Sales;
-	private double Other_Sales;
-	private double Global_Sales;
+	@Column(name="Name")
+	private String name;
+	@Column(name="Platform")
+	private String platform;
+	@Column(name="Year")
+	private int year;
+	@Column(name="Genre")
+	private String genre;
+	@Column(name="Publisher")
+	private String publisher;
+	@Column(name="NA_Sales")
+	private double na_Sales;
+	@Column(name="EU_Sales")
+	private double eu_Sales;
+	@Column(name="JP_Sales")
+	private double jp_Sales;
+	@Column(name="Other_Sales")
+	private double other_Sales;
+	@Column(name="Global_Sales")
+	private double global_Sales;
 	
 	public int getId() {
 		return id;
@@ -39,83 +49,83 @@ public class Game {
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public String getPlatform() {
-		return Platform;
+		return platform;
 	}
 
 	public void setPlatform(String platform) {
-		Platform = platform;
+		this.platform = platform;
 	}
 
 	public int getYear() {
-		return Year;
+		return year;
 	}
 
 	public void setYear(int year) {
-		Year = year;
+		this.year = year;
 	}
 
 	public String getGenre() {
-		return Genre;
+		return genre;
 	}
 
 	public void setGenre(String genre) {
-		Genre = genre;
+		this.genre = genre;
 	}
 
 	public String getPublisher() {
-		return Publisher;
+		return publisher;
 	}
 
 	public void setPublisher(String publisher) {
-		Publisher = publisher;
+		this.publisher = publisher;
 	}
 
 	public double getNA_Sales() {
-		return NA_Sales;
+		return na_Sales;
 	}
 
 	public void setNA_Sales(double nA_Sales) {
-		NA_Sales = nA_Sales;
+		this.na_Sales = nA_Sales;
 	}
 
 	public double getEU_Sales() {
-		return EU_Sales;
+		return eu_Sales;
 	}
 
 	public void setEU_Sales(double eU_Sales) {
-		EU_Sales = eU_Sales;
+		this.eu_Sales = eU_Sales;
 	}
 
 	public double getJP_Sales() {
-		return JP_Sales;
+		return jp_Sales;
 	}
 
 	public void setJP_Sales(double jP_Sales) {
-		JP_Sales = jP_Sales;
+		this.jp_Sales = jP_Sales;
 	}
 
 	public double getOther_Sales() {
-		return Other_Sales;
+		return other_Sales;
 	}
 
 	public void setOther_Sales(double other_Sales) {
-		Other_Sales = other_Sales;
+		this.other_Sales = other_Sales;
 	}
 
 	public double getGlobal_Sales() {
-		return Global_Sales;
+		return global_Sales;
 	}
 
 	public void setGlobal_Sales(double global_Sales) {
-		Global_Sales = global_Sales;
+		this.global_Sales = global_Sales;
 	}
 
 	public Game() {
@@ -124,9 +134,9 @@ public class Game {
 
 	@Override
 	public String toString() {
-		return "Game [Rank=" + id + ", Name=" + Name + ", Platform=" + Platform + ", Year=" + Year + ", Genre="
-				+ Genre + ", Publisher=" + Publisher + ", NA_Sales=" + NA_Sales + ", EU_Sales=" + EU_Sales
-				+ ", JP_Sales=" + JP_Sales + ", Other_Sales=" + Other_Sales + ", Global_Sales=" + Global_Sales + "]";
+		return "Game [Rank=" + id + ", Name=" + name + ", Platform=" + platform + ", Year=" + year + ", Genre="
+				+ genre + ", Publisher=" + publisher + ", NA_Sales=" + na_Sales + ", EU_Sales=" + eu_Sales
+				+ ", JP_Sales=" + jp_Sales + ", Other_Sales=" + other_Sales + ", Global_Sales=" + global_Sales + "]";
 	}
 	
 	
