@@ -22,5 +22,9 @@ public interface GameDAO extends JpaRepository<Game, Integer>{
 	
 	@Query("FROM Game WHERE genre=?1")
 	List<Game> findByGenre(String genre);
+	
+	@Query("from Game where year >=1900 and year<=1999 order by year desc")
+	List<Game> listSXX();
+	
 
 }
