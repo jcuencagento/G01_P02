@@ -13,6 +13,8 @@ import com.grupo01.spring.model.Game;
  * 
  * @author Grupo 01
  *
+ * Clase que, al heredar de la clase JpaRepository<Game, Integer>, hereda los metodos
+ * de Spring Data para poder acceder y modificar la BBDD.
  */
 
 @Repository

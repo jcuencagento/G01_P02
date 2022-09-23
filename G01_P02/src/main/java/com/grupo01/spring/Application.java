@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 
  * @author Grupo 01
- *
+ * Clase que no se utiliza; al ser un proyecto en web
  */
 
 @SpringBootApplication

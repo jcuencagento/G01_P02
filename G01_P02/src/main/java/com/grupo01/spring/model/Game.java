@@ -8,8 +8,14 @@ import javax.persistence.Table;
 
 /**
  * 
- * @author Grupo 01
- *
+ * @author Grupo01
+ * 
+ * Clase Juego(Game). 
+ * Esta es una clase POJO (Plain Old Java Object). Permite guardar en nuestro programa objetos traídos de la Base de Datos.
+ * Mediante la etiqueta @Entity, especificamos a Spring que el objeto es una Entidad (que proviene de la BD).
+ * Mediante la etiqueta @Table(="nombreTabla") podemos relacionar nuestra tabla de juegos con nuestro objeto.
+ * 
+ * La definicion de los atributos incluyen las etiquetas @Column, para referirse al nombre del registro en la tabla; y @Id para definir en el objeto Java la Clave Primaria.
  */
 
 @Entity
