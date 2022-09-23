@@ -23,6 +23,8 @@ public class GameController {
 	@Autowired
 	GameService service;
 
+	/////---GESTION---///////
+	
 	// Indice
 	@GetMapping({ "/", "/games", "", "%" })
 	public String listGames(Model model) {
@@ -59,4 +61,8 @@ public class GameController {
 		model.addAttribute("game", game);
 		return "GameForm";
 	}
+	
+	/////---LISTADOS---///////
+	
+	// Order by year
 }
