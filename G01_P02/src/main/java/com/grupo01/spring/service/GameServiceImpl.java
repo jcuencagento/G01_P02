@@ -69,5 +69,14 @@ public class GameServiceImpl implements GameService {
 		return gameDAO.findByGenre(genre);
 	}
 
-	
+  @Override
+	public List<Game> showEvenYears() {
+		return gameDAO.showEvenYears();
+
+  @Override
+	public List<Game> showNintendo() {
+		return gameDAO.listNintendo();
+
+	}
+  
 }

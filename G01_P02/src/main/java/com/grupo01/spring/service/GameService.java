@@ -30,4 +30,8 @@ public interface GameService {
 
 	public List<Game> showGenre(String genre);
 
+	public List<Game> showEvenYears();
+
+	public List<Game> showNintendo();
+
 }
