@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.grupo01.spring.model.Game;
 import com.grupo01.spring.service.GameService;
-
 /**
  * 
  * @author Grupo 01
@@ -30,20 +29,34 @@ public class GameController {
 		model.addAttribute("gameList", service.findAll());
 		return "GameList";
 	}
-
-		
 	
-	//Guardar
+	// Guardar
 	@PostMapping("/save")
 	public String saveGame(Game game) {
-		service.saveGame(game);
-		return "redirect:/games";
+		System.out.println("--------------------------"+game.toString());
+		service.save(game);
+		return "redirect:/";
 	}
 
-
+	// Save
 	@GetMapping("/edit")
 	public String editGames(@RequestParam("id") int id, Model model) {
 		model.addAttribute("game", service.findById(id));
+		System.out.println("--------------------------"+service.findById(id).toString());
+		return "GameForm";
+	}
+	
+	// Delete
+	@GetMapping("/delete")	
+	public String deleteMovies(@RequestParam("id") int id) {
+		service.deleteById(id);
+		return "redirect:/";
+	}
+	
+	// New
+	@GetMapping("/new")
+	public String newGame(Game game, Model model) {
+		model.addAttribute("game", game);
 		return "GameForm";
 	}
 }

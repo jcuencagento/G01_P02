@@ -3,6 +3,8 @@ package com.grupo01.spring.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,11 +15,11 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="gametable")
+@Table(name="minigametable")
 public class Game {
 	
 	@Id
-	@Column(name="Rank")
+	@Column(name="game_id")
 	private int id;
 	@Column(name="Name")
 	private String name;
@@ -40,104 +42,101 @@ public class Game {
 	@Column(name="Global_Sales")
 	private double global_Sales;
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPlatform() {
-		return platform;
-	}
-
-	public void setPlatform(String platform) {
-		this.platform = platform;
-	}
-
-	public int getYear() {
-		return year;
-	}
-
-	public void setYear(int year) {
-		this.year = year;
-	}
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-
-	public String getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
-
-	public double getNA_Sales() {
-		return na_Sales;
-	}
-
-	public void setNA_Sales(double nA_Sales) {
-		this.na_Sales = nA_Sales;
-	}
-
-	public double getEU_Sales() {
-		return eu_Sales;
-	}
-
-	public void setEU_Sales(double eU_Sales) {
-		this.eu_Sales = eU_Sales;
-	}
-
-	public double getJP_Sales() {
-		return jp_Sales;
-	}
-
-	public void setJP_Sales(double jP_Sales) {
-		this.jp_Sales = jP_Sales;
-	}
-
-	public double getOther_Sales() {
-		return other_Sales;
-	}
-
-	public void setOther_Sales(double other_Sales) {
-		this.other_Sales = other_Sales;
-	}
-
-	public double getGlobal_Sales() {
-		return global_Sales;
-	}
-
-	public void setGlobal_Sales(double global_Sales) {
-		this.global_Sales = global_Sales;
-	}
-
 	public Game() {
 		super();
 	}
+	
+	public Game(int id, String name, String platform, int year, String genre, String publisher, double na_Sales,
+			double eu_Sales, double jp_Sales, double other_Sales, double global_Sales) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.platform = platform;
+		this.year = year;
+		this.genre = genre;
+		this.publisher = publisher;
+		this.na_Sales = na_Sales;
+		this.eu_Sales = eu_Sales;
+		this.jp_Sales = jp_Sales;
+		this.other_Sales = other_Sales;
+		this.global_Sales = global_Sales;
+	}
 
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPlatform() {
+		return platform;
+	}
+	public void setPlatform(String platform) {
+		this.platform = platform;
+	}
+	public int getYear() {
+		return year;
+	}
+	public void setYear(int year) {
+		this.year = year;
+	}
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public String getPublisher() {
+		return publisher;
+	}
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+	public double getNa_Sales() {
+		return na_Sales;
+	}
+	public void setNa_Sales(double na_Sales) {
+		this.na_Sales = na_Sales;
+	}
+	public double getEu_Sales() {
+		return eu_Sales;
+	}
+	public void setEu_Sales(double eu_Sales) {
+		this.eu_Sales = eu_Sales;
+	}
+	public double getJp_Sales() {
+		return jp_Sales;
+	}
+	public void setJp_Sales(double jp_Sales) {
+		this.jp_Sales = jp_Sales;
+	}
+	public double getOther_Sales() {
+		return other_Sales;
+	}
+	public void setOther_Sales(double other_Sales) {
+		this.other_Sales = other_Sales;
+	}
+	public double getGlobal_Sales() {
+		return global_Sales;
+	}
+	public void setGlobal_Sales(double global_Sales) {
+		this.global_Sales = global_Sales;
+	}
 	@Override
 	public String toString() {
-		return "Game [Rank=" + id + ", Name=" + name + ", Platform=" + platform + ", Year=" + year + ", Genre="
-				+ genre + ", Publisher=" + publisher + ", NA_Sales=" + na_Sales + ", EU_Sales=" + eu_Sales
-				+ ", JP_Sales=" + jp_Sales + ", Other_Sales=" + other_Sales + ", Global_Sales=" + global_Sales + "]";
+		return "Game [id=" + id + ", name=" + name + ", platform=" + platform + ", year=" + year + ", genre=" + genre
+				+ ", publisher=" + publisher + ", na_Sales=" + na_Sales + ", eu_Sales=" + eu_Sales + ", jp_Sales="
+				+ jp_Sales + ", other_Sales=" + other_Sales + ", global_Sales=" + global_Sales + "]";
 	}
+	
+	
 	
 	
 

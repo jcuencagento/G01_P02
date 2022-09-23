@@ -14,8 +14,10 @@ import com.grupo01.spring.model.Game;
 public interface GameService {
 	public List<Game> findAll();
   
-	public void saveGame(Game game);
+	public void save(Game game);
   
 	public Optional<Game> findById(int id);
+
+	public void deleteById(int id);
 
 }

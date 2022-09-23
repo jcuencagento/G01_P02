@@ -27,13 +27,19 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void saveGame(Game game) {
+	public void save(Game game) {
+		System.out.println("-------SERVICE--------"+game.toString());
 		gameDAO.save(game);
 	}
 
 	@Override
 	public Optional<Game> findById(int id) {
 		return gameDAO.findById(id);
+	}
+
+	@Override
+	public void deleteById(int id) {
+		gameDAO.deleteById(id);
 	}
   
 }

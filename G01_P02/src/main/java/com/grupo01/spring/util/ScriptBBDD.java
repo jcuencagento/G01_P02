@@ -41,7 +41,7 @@ public class ScriptBBDD {
         String jdbcURL = "jdbc:mysql://localhost:3306/game?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         String username = "root";
         String password = "Ihpo8Jin";
-        String csvFilePath = "vgsalesyeah.csv";
+        String csvFilePath = "minivgsalesyeah.csv";
         File file = buscar(csvFilePath, Paths.get(".").toFile());
 
  
@@ -53,7 +53,7 @@ public class ScriptBBDD {
             
             //Aqui inicializaremos BBDD
             Statement statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `gametable` (     `Rank` int(11) NOT NULL AUTO_INCREMENT, `Name` varchar(300) NOT NULL,    `Platform` varchar(45) NOT NULL,    `Year` int(11) NOT NULL,    `Genre` varchar(45) NOT NULL,    `Publisher` varchar(45) NOT NULL,    `NA_Sales` double,    `EU_Sales` double,    `JP_Sales` double,    `Other_Sales` double,    `Global_Sales` double,    PRIMARY KEY (`Rank`) ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS `minigametable` (     `Rank` int(11) NOT NULL AUTO_INCREMENT, `Name` varchar(300) NOT NULL,    `Platform` varchar(45) NOT NULL,    `Year` int(11) NOT NULL,    `Genre` varchar(45) NOT NULL,    `Publisher` varchar(45) NOT NULL,    `NA_Sales` double,    `EU_Sales` double,    `JP_Sales` double,    `Other_Sales` double,    `Global_Sales` double,    PRIMARY KEY (`Rank`) ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;");
             
             BufferedReader lineReader = new BufferedReader(new FileReader(file));
             String lineText = null;
@@ -94,7 +94,7 @@ public class ScriptBBDD {
                 Double fOther = Double.parseDouble(Other_Sales);
                 Double fGlobal = Double.parseDouble(Global_Sales);
 
-                String sql = "INSERT INTO gametable VALUES ("+
+                String sql = "INSERT INTO minigametable VALUES ("+
                 		RankI+", '"+Name+"', '"+Platform+"', "+YearI+", '"+Genre+"', '"+Publisher+"', "+fNA+", "+fEU+", "+fJP+", "+fOther+", "+fGlobal+");";
                 
                 log.info("Introducimos: "+Name);
