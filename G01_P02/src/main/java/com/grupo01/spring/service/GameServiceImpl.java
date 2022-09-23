@@ -55,18 +55,19 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public List<Game> showSXX() {
-		
 		return gameDAO.listSXX();
 	}
 	
 	
 	@Override
 	public List<Game> showEurope(){
-		
 		return gameDAO.listEurope();
 	}
 
-	//private Sort sortSXX() {
-	//	return Sort.by("year");
-	//}
+	@Override
+	public List<Game> showGenre(String genre) {
+		return gameDAO.findByGenre(genre);
+	}
+
+	
 }
