@@ -10,11 +10,9 @@
 <body>
 
 	<div class="container">
-		<h1>
-			<br />GameForm
-		</h1>
+		<h1><br/>GameForm</h1>
+		<h2>GAME FORM (add/edit)</h2>
 		<div align="center">
-			<h2>GAME FORM (add/edit)</h2>
 
 			<form method="post" th:object="${game}" th:action="@{/save}">
 				<input id="id" th:field="*{id}" type="hidden" />
@@ -40,13 +38,16 @@
 						<td><input type="text" th:field="*{publisher}" /></td>
 					</tr>
 					<tr>
+						<td><label for="eu_Sales">Sales Europe:</label></td>
+						<td><input type="number" th:field="*{eu_Sales}" /></td>
+					</tr>
+					
+					<!-- 
+					<tr>
 						<td><label for="na_Sales">Sales North America:</label></td>
 						<td><input type="number" th:field="*{na_Sales}" /></td>
 					</tr>
-					<tr>
-						<td><label for="eu_Sale">Sales Europe:</label></td>
-						<td><input type="number" th:field="*{eu_Sales}" /></td>
-					</tr>
+					
 					<tr>
 						<td><label for="jp_Sales">Sales Japan:</label></td>
 						<td><input type="number" th:field="*{jp_Sales}" /></td>
@@ -59,7 +60,10 @@
 						<td><label for="global_Sales">Global sales:</label></td>
 						<td><input type="number" th:field="*{global_Sales}" /></td>
 					</tr>
-
+					 -->
+					 
+		
+					
 					<tr>
 						<td colspan="2" align="center"><input type="submit"
 							value="Save Game!"></td>
