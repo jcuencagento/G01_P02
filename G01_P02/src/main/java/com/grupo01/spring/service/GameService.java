@@ -8,7 +8,9 @@ import com.grupo01.spring.model.Game;
 /**
  * 
  * @author Grupo 01
- *
+ * 
+ * Interfaz que contiene los métodos para hacer modificaciones CRUD en la base de datos.
+ * Las información de cada método se encuentra especificada en la clase de implementación. 
  */
 
 public interface GameService {
