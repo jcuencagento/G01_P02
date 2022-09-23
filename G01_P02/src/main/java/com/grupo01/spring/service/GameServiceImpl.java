@@ -2,6 +2,7 @@ package com.grupo01.spring.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Flow.Publisher;
 
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +66,15 @@ public class GameServiceImpl implements GameService {
 		
 		return gameDAO.listEurope();
 	}
+	
+	@Override
+	public List<String> showPublishers(){
+		return gameDAO.listPublishers();
+	}
 
 	//private Sort sortSXX() {
 	//	return Sort.by("year");
 	//}
+	
+	
 }
