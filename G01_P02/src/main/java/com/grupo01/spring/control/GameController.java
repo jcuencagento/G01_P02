@@ -45,7 +45,13 @@ public class GameController {
 		return "GameList";
 	}
 
-	// Description
+	/**
+	 * Metodo descriptionGamesrecibe el id de juego y redirige a la pagina de desctipcion del juego.)
+	 * 
+	 * @param id
+	 * @return Game 
+	 * @author Elina
+	 */
 	@GetMapping("/description")
 		public String descriptionGames(@RequestParam("id") int id, Model model) {
 		Optional<Game> optGame = service.findById(id);
