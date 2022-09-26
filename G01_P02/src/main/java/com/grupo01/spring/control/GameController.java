@@ -1,6 +1,15 @@
 package com.grupo01.spring.control;
 
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +17,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo01.spring.model.Game;
 import com.grupo01.spring.service.GameService;
+import com.grupo01.spring.util.CSVHelper;
+import com.grupo01.spring.util.ScriptBBDD;
+
+import net.bytebuddy.TypeCache.Sort;
 
 /**
  * 
@@ -23,6 +37,28 @@ public class GameController {
 
 	@Autowired
 	GameService service;
+	
+	@Autowired
+	ScriptBBDD script;
+	
+	@Autowired
+	CSVHelper csvhelper;
+	
+	//Para cargar CSV Opcion 1:
+	@GetMapping( "/upload1")
+	public String addAllGamesJBDC(Model model) {
+		ScriptBBDD.deCSVaMySQL();
+		return "redirect:/";
+	}
+	
+	//Para cargar CSV Opcion 2:
+	@GetMapping( "/upload2")
+	public String addAllGamesCSVRecord(Model model) {
+		File file = ScriptBBDD.buscar("complete.csv", Paths.get(".").toFile());
+		csvhelper.csvToGames(file);
+		return "redirect:/";
+	}
+	
 
 	///// ---GESTION---///////
 
@@ -37,11 +73,18 @@ public class GameController {
 	 */
 
 	// Indice
-	@GetMapping({ "/", "/games", "", "%" })
+	@GetMapping({"","/"})
 	public String listGames(Model model) {
 		model.addAttribute("gameList", service.findAll());
 		return "GameList";
 	}
+	
+	@GetMapping("/page")
+	public ResponseEntity<Page<Game>> getGames(@PageableDefault(page = 0,
+	            size = 30) Pageable pageable) {
+	        Page<Game> games = service.findAll(pageable);
+	        return ResponseEntity.ok(games);
+	    }
 
 	// Guardar
 
@@ -58,7 +101,6 @@ public class GameController {
 
 	@PostMapping("/save")
 	public String saveGame(Game game) {
-		System.out.println("--------------------------" + game.toString());
 		service.save(game);
 		return "redirect:/";
 	}
@@ -79,7 +121,7 @@ public class GameController {
 	@GetMapping("/edit")
 	public String editGames(@RequestParam("id") int id, Model model) {
 		model.addAttribute("game", service.findById(id));
-		System.out.println("--------------------------" + service.findById(id).toString());
+		System.out.println("-----------EDIT------------" + service.findById(id).toString());
 		return "GameForm";
 	}
 

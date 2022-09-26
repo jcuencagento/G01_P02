@@ -51,7 +51,7 @@
 		
 		
 		<p>
-			<a href="/new" class="btn btn-primary">New movie</a>
+			<a href="/new" class="btn btn-primary">New game</a>
 		</p>
 
 		<table class="table table-striped">
@@ -61,9 +61,8 @@
 				<th>Platform</th>
 				<th>Year</th>
 				<th>Publisher</th>
-				<th>Sales Europe</th>
+				<th>Sales Europe [M$]</th>
 				<th>Options</th>
-				<th>Genre selected</th>
 				
 			</tr>
 			<tr th:each="game, status : ${listGenre}">
@@ -72,8 +71,7 @@
 				<td th:text="${game.platform}" />
 				<td th:text="${game.year}" />
 				<td th:text="${game.publisher}" />
-				<td th:text="${game.eu_Sales}" />
-				<td th:text="${game.genre}" />
+				<td th:text="${game.eu_Sales}"></td>
 				
 				<td><a th:href="@{/edit(id=${game.id})}">Modify</a> | <a
 					th:href="@{/delete(id=${game.id})}">Delete</a></td>

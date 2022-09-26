@@ -3,6 +3,9 @@ package com.grupo01.spring.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+
 import com.grupo01.spring.model.Game;
 
 /**
@@ -36,5 +39,7 @@ public interface GameService {
 	public List<Game> showEvenYears();
 
 	public List<Game> showNintendo();
+
+	public Page<Game> findAll(Pageable pageable);
 
 }

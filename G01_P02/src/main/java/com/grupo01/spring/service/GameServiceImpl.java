@@ -6,6 +6,8 @@ import java.util.concurrent.Flow.Publisher;
 
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -84,5 +86,9 @@ public class GameServiceImpl implements GameService {
 		return gameDAO.listNintendo();
 
 	}
+  
+  public Page<Game> findAll(Pageable pageable){
+	  return gameDAO.findAll(pageable);
+  }
   
 }
