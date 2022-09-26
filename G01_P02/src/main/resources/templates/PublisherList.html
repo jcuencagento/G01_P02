@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/estilos.css}" />
+
+<title>Game Database</title>
+</head>
+<body>
+
+	<div class="container">
+
+		<h1>
+			THE 8th ART! <br />
+		</h1>
+
+		<h2>GAME DATABASE</h2>
+		<h3>List of Game Publishers</h3>
+
+		<p>
+			<a href="/game" class="btn btn-primary">Back to the game list</a>
+		</p>
+
+		<table class="table table-striped">
+			<tr>
+				<th>Publishers</th>
+			</tr>
+			<tr th:each="string, status : ${listPublishers}">
+				<td th:text="${string}" />
+			</tr>
+
+		</table>
+
+	</div>
+</body>
+</html>

@@ -122,6 +122,13 @@ public class GameController {
 		return "SoldList";
 	}
 	
+	// Publishers
+	@GetMapping("/publisher")
+	public String showPublishers(Model model) {
+		model.addAttribute("listPublishers", service.showPublishers());
+		return "PublisherList";
+	}
+
 	//Games by Genre
 	@GetMapping("/genre")
 	public String showGenre(@RequestParam("genre") String genre, Model model) {

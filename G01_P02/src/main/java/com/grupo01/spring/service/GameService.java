@@ -27,6 +27,9 @@ public interface GameService {
 	public List<Game> showSXX();
 	
 	public List<Game> showEurope();
+	
+	public List<String> showPublishers();
+
 
 	public List<Game> showGenre(String genre);
 
