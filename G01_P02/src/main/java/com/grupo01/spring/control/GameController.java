@@ -1,5 +1,8 @@
 package com.grupo01.spring.control;
 
+
+import java.util.Optional;
+
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
@@ -101,6 +104,17 @@ public class GameController {
 	        Page<Game> games = service.findAll(pageable);
 	        return ResponseEntity.ok(games);
 	    }
+
+	// Description
+	@GetMapping("/description")
+		public String descriptionGames(@RequestParam("id") int id, Model model) {
+		Optional<Game> optGame = service.findById(id);
+		optGame.ifPresent(game -> {
+			System.out.println("--------Description Control-----------" + game);
+			model.addAttribute("game", game);		
+		});
+			return "GameInfo";
+		}
 
 
 	/**

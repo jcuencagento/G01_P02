@@ -77,7 +77,9 @@
 			</tr>
 			<tr th:each="game, status : ${gameList.content}">
 				<td th:text="${game.id}" />
-				<td th:text="${game.name}" />
+				<td>	
+				<a th:text="${game.name}" th:href="@{/description(id=${game.id})}"> </a>	
+				</td> 
 				<td th:text="${game.platform}" />
 				<td th:text="${game.year}" />
 				<td th:text="${game.genre}" />
