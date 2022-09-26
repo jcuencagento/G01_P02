@@ -65,14 +65,14 @@
 				<th>Options</th>
 				
 			</tr>
-			<tr th:each="game, status : ${gameList}">
+			<tr th:each="game, status : ${gameList.content}">
 				<td th:text="${game.id}" />
 				<td th:text="${game.name}" />
 				<td th:text="${game.platform}" />
 				<td th:text="${game.year}" />
 				<td th:text="${game.genre}" />
 				<td th:text="${game.publisher}" />
-				<td th:text="${game.eu_Sales}" />
+				<td th:text="${game.eu_Sales} + ' M $'" />
 				
 				<td style="width: 25%"><a th:href="@{/edit(id=${game.id})}"><img
 						th:title="Edit +' '+ ${game.name}" src="/img/modificar.svg"
@@ -83,6 +83,22 @@
 			</tr>
 
 		</table>
+		
+		<nav>
+      <ul class="pager">
+      
+ Actual <span th:text="${gameList.number}+1"></span>página&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+ Total  <span th:text="${gameList.totalPages}"></span>página&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+<a th:href="@{/(pageNum=1)}">Hogar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a th:href="@{/(pageNum= ${gameList.hasPrevious()}?${gameList.getNumber()}:1)}">Pagina anterior</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a th:href="@{/(pageNum= ${gameList.hasNext()}?${gameList.getNumber()}+2:${gameList.totalPages})}">Siguiente página</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+    <a th:href="@{/(pageNum= ${gameList.totalPages} )}">Última página</a>
+      
+      
+        <!--            <li class = "previous"> <a href = "#" th: href = "@{'/? Page ='+${page.number-1}}" th:unless = "${page.first } "> Previous </a> </li>
+                   <li class = "next"> <a href = "#" th: href = "@{/ (page = ${page.number} +1)}" th:unless = "${page.last}" > Next page </a> </li>--> 
+     </ul>
+</nav> 
 		
 	</div>
 </body>

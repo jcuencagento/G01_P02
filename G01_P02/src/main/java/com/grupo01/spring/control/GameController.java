@@ -1,12 +1,18 @@
 package com.grupo01.spring.control;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.grupo01.spring.model.Game;
@@ -37,9 +43,34 @@ public class GameController {
 	 */
 
 	// Indice
-	@GetMapping({ "/", "/games", "", "%" })
-	public String listGames(Model model) {
-		model.addAttribute("gameList", service.findAll());
+	// @GetMapping({ "/", "/games", "", "%" })
+	// public String listGames(Model model) {
+	// model.addAttribute("gameList", service.findAll());
+	// return "GameList";
+	// }
+
+	//@GetMapping({ "/", "/games", "", "%" })
+	//public String listGames(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+		//	Model model) {
+		//Page<Game> gameList = service.findAllByPage(PageRequest.of(page, size));
+		// System.out.println("-----CONTROL------" + gameList);
+		//model.addAttribute("gameList", gameList);
+		//return "GameList";
+	//}
+
+	@GetMapping("/")
+	public String findByPage(Model model, Integer pageNum) { // Cuando la página actual está
+		// vacía, asigne un valor de
+		// uno, lo que significa que la
+		// página actual es la primera
+		// página
+		if (pageNum == null) {
+
+			pageNum = 1;
+		}
+		Pageable pageable = PageRequest.of(pageNum - 1, 100);
+		Page<Game> page = service.findAllByPage(pageable);
+		model.addAttribute("gameList", page);
 		return "GameList";
 	}
 
@@ -73,9 +104,9 @@ public class GameController {
 	 */
 
 	@GetMapping("/edit")
-	public String editGames(@RequestParam("id") int id, Model model) {
-		model.addAttribute("game", service.findById(id));
-		System.out.println("--------------------------" + service.findById(id).toString());
+	public String editGames(@RequestParam("id") long id, Model model) {
+		model.addAttribute("game", service.findById((int) id));
+		System.out.println("--------------------------" + service.findById((int) id).toString());
 		return "GameForm";
 	}
 
@@ -126,8 +157,9 @@ public class GameController {
 		model.addAttribute("yearList", service.orderYear());
 		return "YearList";
 	}
-	
-	
+
+
+	// Order by year <2000 && >1900
 	/**
 	 * Metodo showSigloXX devuelve los juegos lanzados en el siglo XX ordenados por el anno 
 	 * de lanzamiento.
@@ -137,11 +169,15 @@ public class GameController {
 	 * @author Elina
 	 */
 	//Order by year <2000 && >1900
+
 	@GetMapping("/sxx")
 	public String showSigloXX(Model model) {
 		model.addAttribute("listSXX", service.showSXX());
 		return "ListSXX";
 	}
+
+
+	// Games Europe
 
 	/**
 	 * Metodo devuelve el listado de distintos publishers que se encuentran en la base de datos.
@@ -151,11 +187,15 @@ public class GameController {
 	 * @author Elina
 	 */
 	
+
 	@GetMapping("/europe")
 	public String showEurope(Model model) {
 		model.addAttribute("listEurope", service.showEurope());
 		return "SoldList";
 	}
+
+
+	// Publishers
 	
 	
 	/**
@@ -166,12 +206,15 @@ public class GameController {
 	 * @author Elina
 	 */
 	
+
 	@GetMapping("/publisher")
 	public String showPublishers(Model model) {
 		model.addAttribute("listPublishers", service.showPublishers());
 		return "PublisherList";
 	}
 
+
+	// Games by Genre
 
 	/**
 	 * Metodo showGenre recibe como parametro el genero del juego devuelve el listado de juegos
@@ -182,12 +225,15 @@ public class GameController {
 	 * @author Javier
 	 */
 	
+
 	@GetMapping("/genre")
 	public String showGenre(@RequestParam("genre") String genre, Model model) {
 		model.addAttribute("listGenre", service.showGenre(genre));
 		return "GenreList";
 	}
-	
+
+
+	// Games by even years
 	
 	/**
 	 * Metodo showEvenYears devuelve el listado de juegos lanzados en los annos pares.
@@ -197,11 +243,15 @@ public class GameController {
 	 * @author Antonio
 	 */
 	
+
 	@GetMapping("/even")
 	public String showEvenYears(Model model) {
 		model.addAttribute("evenList", service.showEvenYears());
 		return "EvenYears";
 	}
+
+
+	// juegos nintendo
 
 	
 	/**
@@ -218,5 +268,5 @@ public class GameController {
 		return "NintendoList";
 
 	}
-  
+
 }

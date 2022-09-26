@@ -19,11 +19,11 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="minigametable")
+@Table(name="completetable")
 public class Game {
 	
 	@Id
-	@Column(name="game_id")
+	@Column(name="id")
 	private int id;
 	@Column(name="Name")
 	private String name;
