@@ -73,7 +73,7 @@
 				<td th:text="${game.platform}" />
 				<td th:text="${game.genre}" />
 				<td th:text="${game.publisher}" />
-				<td th:text="${game.eu_Sales}" />
+				<td th:text="${game.eu_Sales}+' M $'" />
 
 				<td style="width: 25%"><a th:href="@{/edit(id=${game.id})}"><img
 						th:title="Edit +' '+ ${game.name}" src="/img/modificar.svg"

@@ -67,7 +67,7 @@
 
 			</tr>
 			<tr th:each="game, status : ${listEurope}">
-				<td th:text="${game.eu_Sales}" />
+				<td th:text="${game.eu_Sales}+' M $'" />
 				<td th:text="${game.id}" />
 				<td th:text="${game.name}" />
 				<td th:text="${game.platform}" />
