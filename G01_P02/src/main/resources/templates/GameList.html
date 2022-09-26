@@ -74,8 +74,12 @@
 				<td th:text="${game.publisher}" />
 				<td th:text="${game.eu_Sales} + ' M $'" />
 				
-				<td><a th:href="@{/edit(id=${game.id})}">Modify</a> | <a
-					th:href="@{/delete(id=${game.id})}">Delete</a></td>
+				<td style="width: 25%"><a th:href="@{/edit(id=${game.id})}"><img
+						th:title="Edit +' '+ ${game.name}" src="/img/modificar.svg"
+						height="5%" width="5%"></a> | <a
+					th:href="@{/delete(id=${game.id})}"><img
+						th:title="Delete +' '+ ${game.name}" src="/img/delete.svg"
+						height="4%" width="4%"></a></td>
 			</tr>
 
 		</table>
