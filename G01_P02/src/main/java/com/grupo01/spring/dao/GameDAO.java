@@ -2,8 +2,10 @@ package com.grupo01.spring.dao;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -20,7 +22,7 @@ import com.grupo01.spring.model.Game;
  */
 
 @Repository
-public interface GameDAO extends JpaRepository<Game, Integer> {
+public interface GameDAO extends JpaRepository<Game, Long> {
 	
 	/**
 	 * Buscador de juegos filtrando por genero
@@ -32,35 +34,35 @@ public interface GameDAO extends JpaRepository<Game, Integer> {
 
 	/**
 	 * 
-	 * @return
+	 * @return List<Game> de juegos del siglo XX
 	 */
 	@Query("from Game where year >=1900 and year<=1999 order by year desc")
 	List<Game> listSXX();
 
 	/**
 	 * 
-	 * @return
+	 * @return List<Game> de los juegos mas vendidos en Europa
 	 */
 	@Query("from Game where eu_Sales > (select AVG(eu_Sales) from Game) order by eu_Sales desc")
 	List<Game> listEurope();
 	
 	/**
 	 * 
-	 * @return
+	 * @return List<Publisher> 
 	 */
 	@Query("select distinct publisher from Game") 
 	List<String> listPublishers();
 	
 	/**
 	 * 
-	 * @return
+	 * @return List<Game> de juegos lanzados en los annos pares
 	 */
 	@Query("from Game where (year %2) = 0 order by year desc")
 	List<Game> showEvenYears();
 
 	/**
 	 * 
-	 * @return
+	 * @return List<Game> de juegos Nintendo
 	 */
 	@Query("from Game where Platform IN ('WII', 'NES', 'GB', 'DS', 'SNES', 'SNES', 'N64','GC','WIIU','DS3')  order by Platform")
 	List<Game> listNintendo();

@@ -3,8 +3,10 @@ package com.grupo01.spring.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 
 import com.grupo01.spring.model.Game;
 
@@ -31,8 +33,7 @@ public interface GameService {
 	
 	public List<Game> showEurope();
 	
-	public List<String> showPublishers();
-
+	public List<String> showPublishers(); 
 
 	public List<Game> showGenre(String genre);
 
@@ -40,6 +41,6 @@ public interface GameService {
 
 	public List<Game> showNintendo();
 
-	public Page<Game> findAll(Pageable pageable);
+	public Page<Game> findAllByPage(Pageable pageable);
 
 }

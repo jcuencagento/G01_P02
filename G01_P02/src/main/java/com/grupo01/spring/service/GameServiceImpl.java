@@ -6,8 +6,10 @@ import java.util.concurrent.Flow.Publisher;
 
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -38,12 +40,12 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public Optional<Game> findById(int id) {
-		return gameDAO.findById(id);
+		return gameDAO.findById((long) id);
 	}
 
 	@Override
 	public void deleteById(int id) {
-		gameDAO.deleteById(id);
+		gameDAO.deleteById((long) id);
 	}
 
 	@Override
@@ -59,36 +61,37 @@ public class GameServiceImpl implements GameService {
 	public List<Game> showSXX() {
 		return gameDAO.listSXX();
 	}
-	
-	
+
 	@Override
-	public List<Game> showEurope(){
+	public List<Game> showEurope() {
 		return gameDAO.listEurope();
 	}
-	
+
 	@Override
-	public List<String> showPublishers(){
+	public List<String> showPublishers() {
 		return gameDAO.listPublishers();
 	}
-	
+
 	@Override
 	public List<Game> showGenre(String genre) {
 		return gameDAO.findByGenre(genre);
 	}
 
-  @Override
+	@Override
 	public List<Game> showEvenYears() {
 		return gameDAO.showEvenYears();
-  }
+	}
 
-  @Override
+	@Override
 	public List<Game> showNintendo() {
 		return gameDAO.listNintendo();
 
 	}
-  
-  public Page<Game> findAll(Pageable pageable){
-	  return gameDAO.findAll(pageable);
-  }
-  
+
+	@Override
+	public Page<Game> findAllByPage(Pageable pageable) {
+
+		return gameDAO.findAll(pageable);
+	}
+
 }
