@@ -91,7 +91,6 @@ public class GameController {
 		return "redirect:/";
 	}
 
-
 	/**
 	 * Metodo editGames,puede modificar todos los campos de un juego,guardamos el id
 	 * con RequestParam y mediante el metodo findById(id) lo enviamos a la capa
@@ -111,6 +110,7 @@ public class GameController {
 	}
 
 	
+	
 	/**
 	 * Metodo deleteGame sirve para borrar un registro de juego. Se recibe el id del juego
 	 * con RequestParam y mediante el metodo deleteById(id) se lo borra de la base de datos.
@@ -119,11 +119,15 @@ public class GameController {
 	 * @author Javier
 	 */
 	
+
 	@GetMapping("/delete")
 	public String deleteGame(@RequestParam("id") int id) {
 		service.deleteById(id);
 		return "redirect:/";
 	}
+
+
+
 
 	
 	/**
@@ -135,6 +139,7 @@ public class GameController {
 	 * @author Javier
 	 */
 
+
 	@GetMapping("/new")
 	public String newGame(Game game, Model model) {
 		model.addAttribute("game", game);
@@ -143,14 +148,16 @@ public class GameController {
 
 	///// ---LISTADOS---///////
 
-
 	/**
-	 * Metodo orderYear ordena juegos por anno de lanzamiento.
+	 * Metodo orderYear,puede ordenar todos los juegos por su año,lo enviamos a la
+	 * capa Service,y nos envia al html correspondiente(YearList.html)
 	 * 
-	 * @param genre
-	 * @return String???
+	 * @param model
+	 * @return String
 	 * @author Ailed
 	 */
+	// Order by year
+
 
 	@GetMapping("/order")
 	public String orderYear(Model model) {
@@ -159,16 +166,17 @@ public class GameController {
 	}
 
 
-	// Order by year <2000 && >1900
 	/**
-	 * Metodo showSigloXX devuelve los juegos lanzados en el siglo XX ordenados por el anno 
-	 * de lanzamiento.
+	 * Metodo showSigloXX,muestra todos los juegos desde el año 1900 a 2000,lo
+	 * enviamos a la capa Service,y nos envia al html correspondiente que muestra
+	 * solo los juegos del siglo XX(ListSXX.html)
 	 * 
-	 * @param genre
-	 * @return List<Game>
-	 * @author Elina
+	 * @param model
+	 * @return String
+	 * @author Antonio
 	 */
-	//Order by year <2000 && >1900
+	// Order by year <2000 && >1900
+
 
 	@GetMapping("/sxx")
 	public String showSigloXX(Model model) {
@@ -177,16 +185,16 @@ public class GameController {
 	}
 
 
-	// Games Europe
-
 	/**
-	 * Metodo devuelve el listado de distintos publishers que se encuentran en la base de datos.
+	 * Metodo showEurope,muestra todos los juegos que superan la media de ventas de
+	 * Europa,lo enviamos a la capa Service,y nos envia al html correspondiente que
+	 * muestra solo los juegos que superen esta media(SoldList.html)
 	 * 
-	 * @param genre
-	 * @return List<Game>
-	 * @author Elina
+	 * @param model
+	 * @return String
+	 * @author Javier
 	 */
-	
+	// Games Europe
 
 	@GetMapping("/europe")
 	public String showEurope(Model model) {
@@ -195,14 +203,13 @@ public class GameController {
 	}
 
 
-	// Publishers
-	
-	
 	/**
-	 * Metodo devuelve el listado de distintos publishers que se encuentran en la base de datos.
+	 * Metodo showPublishers,muestra solo los publishers de todos los juegos,lo
+	 * enviamos a la capa Service,y nos envia al html correspondiente que muestra
+	 * solo los publishers de los juegos(PublisherList.html)
 	 * 
-	 * @param genre
-	 * @return List<Publisher>
+	 * @param model
+	 * @return String
 	 * @author Elina
 	 */
 	
@@ -212,7 +219,6 @@ public class GameController {
 		model.addAttribute("listPublishers", service.showPublishers());
 		return "PublisherList";
 	}
-
 
 	// Games by Genre
 
@@ -226,23 +232,26 @@ public class GameController {
 	 */
 	
 
+
 	@GetMapping("/genre")
 	public String showGenre(@RequestParam("genre") String genre, Model model) {
 		model.addAttribute("listGenre", service.showGenre(genre));
 		return "GenreList";
 	}
 
-
-	// Games by even years
-	
 	/**
-	 * Metodo showEvenYears devuelve el listado de juegos lanzados en los annos pares.
+	 * Metodo showEvenYears,muestra solo los juegos de años pares ,lo enviamos a la
+	 * capa Service para que sea implementado,y nos envia al html correspondiente
+	 * que muestra los juegos por años pares(EvenYears.html)
 	 * 
 	 * @param model
-	 * @return List<Game>
+	 * @return String
 	 * @author Antonio
 	 */
+	// Games by even years
+
 	
+
 
 	@GetMapping("/even")
 	public String showEvenYears(Model model) {
@@ -251,17 +260,19 @@ public class GameController {
 	}
 
 
-	// juegos nintendo
-
-	
 	/**
-	 * Metodo showNintendo devuelve el listado de juegos desarrollados por Nuntendo.
+	 * Metodo showNintendo,muestra solo los juegos de plataforma Nintendo('WII',
+	 * 'NES', 'GB', 'DS', 'SNES', 'SNES', 'N64','GC','WIIU','DS3') ,lo enviamos a la
+	 * capa Service para que sea implementado,y nos envia al html correspondiente
+	 * que muestra los juegos de Nintendo(NintendoList.html)
 	 * 
+	 * @param id
 	 * @param model
-	 * @return List<Game>
+	 * @return String
 	 * @author Ailed
 	 */
-	
+	// juegos nintendo
+
 	@GetMapping("/nintendo")
 	public String showNintendo(Model model) {
 		model.addAttribute("listNintendo", service.showNintendo());
