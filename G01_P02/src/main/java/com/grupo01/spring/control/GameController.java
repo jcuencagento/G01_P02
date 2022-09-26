@@ -38,7 +38,7 @@ public class GameController {
 	 * correspondiente(GameList.html)
 	 * 
 	 * @param model
-	 * @return String
+	 * @return List<Game> 
 	 * @author Javier
 	 */
 
@@ -74,18 +74,15 @@ public class GameController {
 		return "GameList";
 	}
 
-	// Guardar
 
 	/**
-	 * Metodo saveGames,puede salvar ya sea una modificacion o eliminacion en el
+	 * Metodo saveGames,puede guardar ya sea una modificacion o eliminacion en el
 	 * listados de juegos,mediante el metodo save(game) , y nos redirige al
 	 * formulario correspondiente(GameList.html)
 	 * 
 	 * @param game
-	 * @return String
 	 * @author Elina
 	 */
-	// Guardar
 
 	@PostMapping("/save")
 	public String saveGame(Game game) {
@@ -94,7 +91,6 @@ public class GameController {
 		return "redirect:/";
 	}
 
-	// Save
 
 	/**
 	 * Metodo editGames,puede modificar todos los campos de un juego,guardamos el id
@@ -103,7 +99,7 @@ public class GameController {
 	 * 
 	 * @param id
 	 * @param model
-	 * @return String
+	 * @return GameForm.html
 	 * @author Ailed
 	 */
 
@@ -114,14 +110,31 @@ public class GameController {
 		return "GameForm";
 	}
 
-	// Delete
+	
+	/**
+	 * Metodo deleteGame sirve para borrar un registro de juego. Se recibe el id del juego
+	 * con RequestParam y mediante el metodo deleteById(id) se lo borra de la base de datos.
+	 * 
+	 * @param id
+	 * @author Javier
+	 */
+	
 	@GetMapping("/delete")
-	public String deleteMovies(@RequestParam("id") int id) {
+	public String deleteGame(@RequestParam("id") int id) {
 		service.deleteById(id);
 		return "redirect:/";
 	}
 
-	// New
+	
+	/**
+	 * Metodo newGame sirve para annadir un nuevo juego a la base de datos. Se inicia el metodo
+	 * dando al boton "New game" que lleva el usuario al formulario GameForm. Mediante el formulario
+	 * se introduce los datos del nyevo juego. 
+	 * 
+	 * @param id
+	 * @author Javier
+	 */
+
 	@GetMapping("/new")
 	public String newGame(Game game, Model model) {
 		model.addAttribute("game", game);
@@ -130,7 +143,14 @@ public class GameController {
 
 	///// ---LISTADOS---///////
 
-	// Order by year
+
+	/**
+	 * Metodo orderYear ordena juegos por anno de lanzamiento.
+	 * 
+	 * @param genre
+	 * @return String???
+	 * @author Ailed
+	 */
 
 	@GetMapping("/order")
 	public String orderYear(Model model) {
@@ -138,42 +158,110 @@ public class GameController {
 		return "YearList";
 	}
 
+
 	// Order by year <2000 && >1900
+	/**
+	 * Metodo showSigloXX devuelve los juegos lanzados en el siglo XX ordenados por el anno 
+	 * de lanzamiento.
+	 * 
+	 * @param genre
+	 * @return List<Game>
+	 * @author Elina
+	 */
+	//Order by year <2000 && >1900
+
 	@GetMapping("/sxx")
 	public String showSigloXX(Model model) {
 		model.addAttribute("listSXX", service.showSXX());
 		return "ListSXX";
 	}
 
+
 	// Games Europe
+
+	/**
+	 * Metodo devuelve el listado de distintos publishers que se encuentran en la base de datos.
+	 * 
+	 * @param genre
+	 * @return List<Game>
+	 * @author Elina
+	 */
+	
+
 	@GetMapping("/europe")
 	public String showEurope(Model model) {
 		model.addAttribute("listEurope", service.showEurope());
 		return "SoldList";
 	}
 
+
 	// Publishers
+	
+	
+	/**
+	 * Metodo devuelve el listado de distintos publishers que se encuentran en la base de datos.
+	 * 
+	 * @param genre
+	 * @return List<Publisher>
+	 * @author Elina
+	 */
+	
+
 	@GetMapping("/publisher")
 	public String showPublishers(Model model) {
 		model.addAttribute("listPublishers", service.showPublishers());
 		return "PublisherList";
 	}
 
+
 	// Games by Genre
+
+	/**
+	 * Metodo showGenre recibe como parametro el genero del juego devuelve el listado de juegos
+	 * que pertenecen a ese genero.
+	 * 
+	 * @param genre
+	 * @return List<Game>
+	 * @author Javier
+	 */
+	
+
 	@GetMapping("/genre")
 	public String showGenre(@RequestParam("genre") String genre, Model model) {
 		model.addAttribute("listGenre", service.showGenre(genre));
 		return "GenreList";
 	}
 
+
 	// Games by even years
+	
+	/**
+	 * Metodo showEvenYears devuelve el listado de juegos lanzados en los annos pares.
+	 * 
+	 * @param model
+	 * @return List<Game>
+	 * @author Antonio
+	 */
+	
+
 	@GetMapping("/even")
 	public String showEvenYears(Model model) {
 		model.addAttribute("evenList", service.showEvenYears());
 		return "EvenYears";
 	}
 
+
 	// juegos nintendo
+
+	
+	/**
+	 * Metodo showNintendo devuelve el listado de juegos desarrollados por Nuntendo.
+	 * 
+	 * @param model
+	 * @return List<Game>
+	 * @author Ailed
+	 */
+	
 	@GetMapping("/nintendo")
 	public String showNintendo(Model model) {
 		model.addAttribute("listNintendo", service.showNintendo());

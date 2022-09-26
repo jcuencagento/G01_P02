@@ -32,35 +32,35 @@ public interface GameDAO extends JpaRepository<Game, Long> {
 
 	/**
 	 * 
-	 * @return
+	 * @return List<Game> de juegos del siglo XX
 	 */
 	@Query("from Game where year >=1900 and year<=1999 order by year desc")
 	List<Game> listSXX();
 
 	/**
 	 * 
-	 * @return
+	 * @return List<Game> de los juegos mas vendidos en Europa
 	 */
 	@Query("from Game where eu_Sales > (select AVG(eu_Sales) from Game) order by eu_Sales desc")
 	List<Game> listEurope();
 	
 	/**
 	 * 
-	 * @return
+	 * @return List<Publisher> 
 	 */
 	@Query("select distinct publisher from Game") 
 	List<String> listPublishers();
 	
 	/**
 	 * 
-	 * @return
+	 * @return List<Game> de juegos lanzados en los annos pares
 	 */
 	@Query("from Game where (year %2) = 0 order by year desc")
 	List<Game> showEvenYears();
 
 	/**
 	 * 
-	 * @return
+	 * @return List<Game> de juegos Nintendo
 	 */
 	@Query("from Game where Platform IN ('WII', 'NES', 'GB', 'DS', 'SNES', 'SNES', 'N64','GC','WIIU','DS3')  order by Platform")
 	List<Game> listNintendo();
