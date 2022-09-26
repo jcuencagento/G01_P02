@@ -31,7 +31,6 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public void save(Game game) {
-		System.out.println("-------SERVICE--------" + game.toString());
 		gameDAO.save(game);
 	}
 
@@ -69,11 +68,6 @@ public class GameServiceImpl implements GameService {
 	public List<String> showPublishers(){
 		return gameDAO.listPublishers();
 	}
-
-	//private Sort sortSXX() {
-	//	return Sort.by("year");
-	//}
-	
 	
 	@Override
 	public List<Game> showGenre(String genre) {
