@@ -1,5 +1,7 @@
 package com.grupo01.spring.control;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +44,17 @@ public class GameController {
 		model.addAttribute("gameList", service.findAll());
 		return "GameList";
 	}
+
+	// Description
+	@GetMapping("/description")
+		public String descriptionGames(@RequestParam("id") int id, Model model) {
+		Optional<Game> optGame = service.findById(id);
+		optGame.ifPresent(game -> {
+			System.out.println("--------Description Control-----------" + game);
+			model.addAttribute("game", game);		
+		});
+			return "GameInfo";
+		}
 
 
 	/**
