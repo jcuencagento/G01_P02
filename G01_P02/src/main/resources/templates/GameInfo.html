@@ -9,13 +9,13 @@
 <title>Game Database</title>
 </head>
 
-
 <nav class="cabecero">
 	<ul class="princ">
 	<li><a id="gestion" href="/"> <strong>Game List Management</strong></a></li>
 	<li><a id="opciones" href="/"><strong>List options</strong></a>
 		<ul class="nav">
 			<li><a href="/publisher">Publisher list</a></li>
+			<li><a href="/order">Order by year</a></li>
 			<li><a href="/europe">Most sold games in Europe</a></li>
 			<li><a href="/order">Games ordered by year</a></li>
 			<li><a href="/even">Games from even years</a></li>
@@ -43,6 +43,7 @@
 	
 </nav>
 
+
 <body>
 
 	<div class="container">
@@ -55,7 +56,7 @@
 		<p>.</p>
 		<p align="left"> The game was launched in <span th:text="${game.year}"></span> 
 		by <span th:text="${game.publisher}"></span>. It ranks number <span th:text="${game.id}"></span> worldwide. 
-	    It's revenue in the gaming market in Europe as of today amounts to <span th:text="${game.eu_Sales}"></span> million US.dollars. </p>
+	    It's revenue in the gaming market in Europe as of today amounts to <span th:text="${game.eu_Sales}"></span> million US dollars. </p>
 		<p>.</p>
 
 		<table class="table table-striped">

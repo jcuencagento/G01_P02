@@ -24,6 +24,7 @@
 	<li><a id="opciones" href="/"><strong>List options</strong></a>
 		<ul class="nav">
 			<li><a href="/publisher">Publisher list</a></li>
+			<li><a href="/order">Order by year</a></li>
 			<li><a href="/europe">Most sold games in Europe</a></li>
 			<li><a href="/order">Games ordered by year</a></li>
 			<li><a href="/even">Games from even years</a></li>
@@ -64,7 +65,7 @@
 		</p>
 
 		
-		<table id="listaJuegos" class="display" cellspacing="0" width="100%">
+		<table id="listaJuegos" class="table table-striped">
 			<tr>
 				<th>Rank</th>
 				<th>Name</th>
@@ -79,7 +80,7 @@
 			<tr th:each="game, status : ${gameList.content}">
 				<td th:text="${game.id}" />
 				<td>	
-				<a th:text="${game.name}" th:href="@{/description(id=${game.id})}"> </a>	
+				<a id="desc" th:text="${game.name}" th:href="@{/description(id=${game.id})}"> </a>	
 				</td> 
 				<td th:text="${game.platform}" />
 				<td th:text="${game.year}" />
@@ -103,10 +104,10 @@
       
           Actual <span th:text="${gameList.number}+1"></span>página&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
           Total  <span th:text="${gameList.totalPages}"></span>página&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-          <a th:href="@{/(pageNum=1)}">Hogar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-          <a th:href="@{/(pageNum= ${gameList.hasPrevious()}?${gameList.getNumber()}:1)}">Pagina anterior</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-          <a th:href="@{/(pageNum= ${gameList.hasNext()}?${gameList.getNumber()}+2:${gameList.totalPages})}">Siguiente página</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-          <a th:href="@{/(pageNum= ${gameList.totalPages} )}">Última página</a>
+          <a class="pags" th:href="@{/(pageNum=1)}">Hogar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+          <a class="pags" th:href="@{/(pageNum= ${gameList.hasPrevious()}?${gameList.getNumber()}:1)}">Pagina anterior</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+          <a class="pags" th:href="@{/(pageNum= ${gameList.hasNext()}?${gameList.getNumber()}+2:${gameList.totalPages})}">Siguiente página</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+          <a class="pags" th:href="@{/(pageNum= ${gameList.totalPages} )}">Última página</a>
      
      </ul>
   </nav> 

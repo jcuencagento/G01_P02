@@ -22,7 +22,7 @@ import com.grupo01.spring.model.Game;
  */
 
 @Repository
-public interface GameDAO extends JpaRepository<Game, Long> {
+public interface GameDAO extends JpaRepository<Game, Integer> {
 	
 	/**
 	 * Buscador de juegos filtrando por genero
