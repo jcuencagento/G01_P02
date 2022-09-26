@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
->
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,7 +49,18 @@ public class GameController {
 	@Autowired
 	CSVHelper csvhelper;
 	
+	////// ----METODOS DE CARGA----- /////
+	
+	/**
+	 * Esos dos metodos reciben un model y te devuelven a la pagina principal con la carga del archivo csv elegido.
+	 * Solo es necesario cargarlos una vez (ya lo estan).
+	 * 
+	 * @param model
+	 * @return
+	 */
+	
 	//Para cargar CSV Opcion 1:
+	//Mas rapido -> usamos Column en Game.java
 	@GetMapping( "/upload1")
 	public String addAllGamesJBDC(Model model) {
 		ScriptBBDD.deCSVaMySQL();
@@ -57,6 +68,7 @@ public class GameController {
 	}
 	
 	//Para cargar CSV Opcion 2:
+	//Mas lento -> usamos CSV Binder en Game.java
 	@GetMapping( "/upload2")
 	public String addAllGamesCSVRecord(Model model) {
 		File file = ScriptBBDD.buscar("complete.csv", Paths.get(".").toFile());
@@ -79,8 +91,6 @@ public class GameController {
 
 	// Indice
 
-
-
 	@GetMapping("/")
 	public String findByPage(Model model, Integer pageNum) { // Cuando la página actual está
 		// vacía, asigne un valor de
@@ -97,13 +107,6 @@ public class GameController {
 
 		return "GameList";
 	}
-	
-	@GetMapping("/page")
-	public ResponseEntity<Page<Game>> getGames(@PageableDefault(page = 0,
-	            size = 30) Pageable pageable) {
-	        Page<Game> games = service.findAll(pageable);
-	        return ResponseEntity.ok(games);
-	    }
 
 	/**
 	 * Metodo descriptionGamesrecibe el id de juego y redirige a la pagina de desctipcion del juego.)
@@ -150,9 +153,9 @@ public class GameController {
 	 */
 
 	@GetMapping("/edit")
-	public String editGames(@RequestParam("id") long id, Model model) {
-		model.addAttribute("game", service.findById((int) id));
-		System.out.println("--------------------------" + service.findById((int) id).toString());
+	public String editGames(@RequestParam("id") int id, Model model) {
+		model.addAttribute("game", service.findById(id));
+		System.out.println("--------------------------" + service.findById(id).toString());
 
 		return "GameForm";
 	}
@@ -183,7 +186,7 @@ public class GameController {
 	 * dando al boton "New game" que lleva el usuario al formulario GameForm. Mediante el formulario
 	 * se introduce los datos del nyevo juego. 
 	 * 
-	 * @param id
+	 * @param game, model
 	 * @author Javier
 	 */
 

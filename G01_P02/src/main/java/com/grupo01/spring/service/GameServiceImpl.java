@@ -40,12 +40,12 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public Optional<Game> findById(int id) {
-		return gameDAO.findById((long) id);
+		return gameDAO.findById(id);
 	}
 
 	@Override
 	public void deleteById(int id) {
-		gameDAO.deleteById((long) id);
+		gameDAO.deleteById(id);
 	}
 
 	@Override
