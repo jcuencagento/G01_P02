@@ -2,11 +2,8 @@ package com.grupo01.spring.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.Flow.Publisher;
-
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,11 +20,12 @@ import com.grupo01.spring.model.Game;
  */
 
 @Service
+@Primary
 public class GameServiceImpl implements GameService {
 
 	@Autowired
 	GameDAO gameDAO;
-
+	
 	@Override
 	public List<Game> findAll() {
 		return gameDAO.findAll();

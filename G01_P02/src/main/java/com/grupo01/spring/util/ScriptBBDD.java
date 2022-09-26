@@ -134,40 +134,5 @@ public class ScriptBBDD {
                 e.printStackTrace();
             }
         }
- 
-	}
-	 
-	@Autowired
-	static JdbcTemplate jdbcTemplate;
-	
-	@Autowired
-	GameService service;
-	 
-	
-	public void springJDBC() {
-		String csvFilePath = "minivgsalesyeah.csv";
-		File file = buscar(csvFilePath, Paths.get(".").toFile());
-
-        // parse CSV file to create a list of `User` objects
-        try (Reader reader = new BufferedReader(new FileReader(file))) {
-
-            // create csv bean reader
-            CsvToBean<Game> csvToBean = new CsvToBeanBuilder<Game>(reader)
-                    .withType(Game.class)
-                    .withIgnoreLeadingWhiteSpace(true)
-                    .build();
-
-            // convert `CsvToBean` object to list of games
-            List<Game> games = csvToBean.parse();
-
-            // TODO: save users in DB?
-            for(Game g: games) {
-            	System.out.println("---------------JDBC: "+g.toString());
-            	//service.save(g);
-            }
-
-        } catch (Exception e) {
-        }
-        
-	}
+	 }
 }
