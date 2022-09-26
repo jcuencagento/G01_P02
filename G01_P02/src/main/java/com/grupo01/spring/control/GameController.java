@@ -1,18 +1,35 @@
 package com.grupo01.spring.control;
 
+
 import java.util.Optional;
 
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.List;
+
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+>
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo01.spring.model.Game;
 import com.grupo01.spring.service.GameService;
+import com.grupo01.spring.util.CSVHelper;
+import com.grupo01.spring.util.ScriptBBDD;
+
+import net.bytebuddy.TypeCache.Sort;
 
 /**
  * 
@@ -25,6 +42,28 @@ public class GameController {
 
 	@Autowired
 	GameService service;
+	
+	@Autowired
+	ScriptBBDD script;
+	
+	@Autowired
+	CSVHelper csvhelper;
+	
+	//Para cargar CSV Opcion 1:
+	@GetMapping( "/upload1")
+	public String addAllGamesJBDC(Model model) {
+		ScriptBBDD.deCSVaMySQL();
+		return "redirect:/";
+	}
+	
+	//Para cargar CSV Opcion 2:
+	@GetMapping( "/upload2")
+	public String addAllGamesCSVRecord(Model model) {
+		File file = ScriptBBDD.buscar("complete.csv", Paths.get(".").toFile());
+		csvhelper.csvToGames(file);
+		return "redirect:/";
+	}
+	
 
 	///// ---GESTION---///////
 
@@ -39,11 +78,32 @@ public class GameController {
 	 */
 
 	// Indice
-	@GetMapping({ "/", "/games", "", "%" })
-	public String listGames(Model model) {
-		model.addAttribute("gameList", service.findAll());
+
+
+
+	@GetMapping("/")
+	public String findByPage(Model model, Integer pageNum) { // Cuando la página actual está
+		// vacía, asigne un valor de
+		// uno, lo que significa que la
+		// página actual es la primera
+		// página
+		if (pageNum == null) {
+
+			pageNum = 1;
+		}
+		Pageable pageable = PageRequest.of(pageNum - 1, 100);
+		Page<Game> page = service.findAllByPage(pageable);
+		model.addAttribute("gameList", page);
+
 		return "GameList";
 	}
+	
+	@GetMapping("/page")
+	public ResponseEntity<Page<Game>> getGames(@PageableDefault(page = 0,
+	            size = 30) Pageable pageable) {
+	        Page<Game> games = service.findAll(pageable);
+	        return ResponseEntity.ok(games);
+	    }
 
 	// Description
 	@GetMapping("/description")
@@ -68,11 +128,9 @@ public class GameController {
 
 	@PostMapping("/save")
 	public String saveGame(Game game) {
-		System.out.println("--------------------------" + game.toString());
 		service.save(game);
 		return "redirect:/";
 	}
-
 
 	/**
 	 * Metodo editGames,puede modificar todos los campos de un juego,guardamos el id
@@ -86,12 +144,14 @@ public class GameController {
 	 */
 
 	@GetMapping("/edit")
-	public String editGames(@RequestParam("id") int id, Model model) {
-		model.addAttribute("game", service.findById(id));
-		System.out.println("--------------------------" + service.findById(id).toString());
+	public String editGames(@RequestParam("id") long id, Model model) {
+		model.addAttribute("game", service.findById((int) id));
+		System.out.println("--------------------------" + service.findById((int) id).toString());
+
 		return "GameForm";
 	}
 
+	
 	
 	/**
 	 * Metodo deleteGame sirve para borrar un registro de juego. Se recibe el id del juego
@@ -101,11 +161,15 @@ public class GameController {
 	 * @author Javier
 	 */
 	
+
 	@GetMapping("/delete")
 	public String deleteGame(@RequestParam("id") int id) {
 		service.deleteById(id);
 		return "redirect:/";
 	}
+
+
+
 
 	
 	/**
@@ -117,6 +181,7 @@ public class GameController {
 	 * @author Javier
 	 */
 
+
 	@GetMapping("/new")
 	public String newGame(Game game, Model model) {
 		model.addAttribute("game", game);
@@ -125,66 +190,79 @@ public class GameController {
 
 	///// ---LISTADOS---///////
 
-
 	/**
-	 * Metodo orderYear ordena juegos por anno de lanzamiento.
+	 * Metodo orderYear,puede ordenar todos los juegos por su año,lo enviamos a la
+	 * capa Service,y nos envia al html correspondiente(YearList.html)
 	 * 
-	 * @param genre
-	 * @return String???
+	 * @param model
+	 * @return String
 	 * @author Ailed
 	 */
+	// Order by year
+
 
 	@GetMapping("/order")
 	public String orderYear(Model model) {
 		model.addAttribute("yearList", service.orderYear());
 		return "YearList";
 	}
-	
-	
+
+
 	/**
-	 * Metodo showSigloXX devuelve los juegos lanzados en el siglo XX ordenados por el anno 
-	 * de lanzamiento.
+	 * Metodo showSigloXX,muestra todos los juegos desde el año 1900 a 2000,lo
+	 * enviamos a la capa Service,y nos envia al html correspondiente que muestra
+	 * solo los juegos del siglo XX(ListSXX.html)
 	 * 
-	 * @param genre
-	 * @return List<Game>
-	 * @author Elina
+	 * @param model
+	 * @return String
+	 * @author Antonio
 	 */
-	//Order by year <2000 && >1900
+	// Order by year <2000 && >1900
+
+
 	@GetMapping("/sxx")
 	public String showSigloXX(Model model) {
 		model.addAttribute("listSXX", service.showSXX());
 		return "ListSXX";
 	}
 
+
 	/**
-	 * Metodo devuelve el listado de distintos publishers que se encuentran en la base de datos.
+	 * Metodo showEurope,muestra todos los juegos que superan la media de ventas de
+	 * Europa,lo enviamos a la capa Service,y nos envia al html correspondiente que
+	 * muestra solo los juegos que superen esta media(SoldList.html)
 	 * 
-	 * @param genre
-	 * @return List<Game>
-	 * @author Elina
+	 * @param model
+	 * @return String
+	 * @author Javier
 	 */
-	
+	// Games Europe
+
 	@GetMapping("/europe")
 	public String showEurope(Model model) {
 		model.addAttribute("listEurope", service.showEurope());
 		return "SoldList";
 	}
-	
-	
+
+
 	/**
-	 * Metodo devuelve el listado de distintos publishers que se encuentran en la base de datos.
+	 * Metodo showPublishers,muestra solo los publishers de todos los juegos,lo
+	 * enviamos a la capa Service,y nos envia al html correspondiente que muestra
+	 * solo los publishers de los juegos(PublisherList.html)
 	 * 
-	 * @param genre
-	 * @return List<Publisher>
+	 * @param model
+	 * @return String
 	 * @author Elina
 	 */
 	
+
 	@GetMapping("/publisher")
 	public String showPublishers(Model model) {
 		model.addAttribute("listPublishers", service.showPublishers());
 		return "PublisherList";
 	}
 
+	// Games by Genre
 
 	/**
 	 * Metodo showGenre recibe como parametro el genero del juego devuelve el listado de juegos
@@ -195,41 +273,53 @@ public class GameController {
 	 * @author Javier
 	 */
 	
+
+
 	@GetMapping("/genre")
 	public String showGenre(@RequestParam("genre") String genre, Model model) {
 		model.addAttribute("listGenre", service.showGenre(genre));
 		return "GenreList";
 	}
-	
-	
+
 	/**
-	 * Metodo showEvenYears devuelve el listado de juegos lanzados en los annos pares.
+	 * Metodo showEvenYears,muestra solo los juegos de años pares ,lo enviamos a la
+	 * capa Service para que sea implementado,y nos envia al html correspondiente
+	 * que muestra los juegos por años pares(EvenYears.html)
 	 * 
 	 * @param model
-	 * @return List<Game>
+	 * @return String
 	 * @author Antonio
 	 */
+	// Games by even years
+
 	
+
+
 	@GetMapping("/even")
 	public String showEvenYears(Model model) {
 		model.addAttribute("evenList", service.showEvenYears());
 		return "EvenYears";
 	}
 
-	
+
 	/**
-	 * Metodo showNintendo devuelve el listado de juegos desarrollados por Nuntendo.
+	 * Metodo showNintendo,muestra solo los juegos de plataforma Nintendo('WII',
+	 * 'NES', 'GB', 'DS', 'SNES', 'SNES', 'N64','GC','WIIU','DS3') ,lo enviamos a la
+	 * capa Service para que sea implementado,y nos envia al html correspondiente
+	 * que muestra los juegos de Nintendo(NintendoList.html)
 	 * 
+	 * @param id
 	 * @param model
-	 * @return List<Game>
+	 * @return String
 	 * @author Ailed
 	 */
-	
+	// juegos nintendo
+
 	@GetMapping("/nintendo")
 	public String showNintendo(Model model) {
 		model.addAttribute("listNintendo", service.showNintendo());
 		return "NintendoList";
 
 	}
-  
+
 }

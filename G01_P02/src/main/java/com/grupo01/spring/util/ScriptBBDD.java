@@ -4,15 +4,28 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
+import com.grupo01.spring.dao.GameDAO;
+import com.grupo01.spring.model.Game;
+import com.grupo01.spring.service.GameService;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
+
+@Service("script")
 public class ScriptBBDD {
 	
 	private static final Logger log = LoggerFactory.getLogger(ScriptBBDD.class);
@@ -122,5 +135,39 @@ public class ScriptBBDD {
             }
         }
  
+	}
+	 
+	@Autowired
+	static JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	GameService service;
+	 
+	
+	public void springJDBC() {
+		String csvFilePath = "minivgsalesyeah.csv";
+		File file = buscar(csvFilePath, Paths.get(".").toFile());
+
+        // parse CSV file to create a list of `User` objects
+        try (Reader reader = new BufferedReader(new FileReader(file))) {
+
+            // create csv bean reader
+            CsvToBean<Game> csvToBean = new CsvToBeanBuilder<Game>(reader)
+                    .withType(Game.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            // convert `CsvToBean` object to list of games
+            List<Game> games = csvToBean.parse();
+
+            // TODO: save users in DB?
+            for(Game g: games) {
+            	System.out.println("---------------JDBC: "+g.toString());
+            	//service.save(g);
+            }
+
+        } catch (Exception e) {
+        }
+        
 	}
 }
