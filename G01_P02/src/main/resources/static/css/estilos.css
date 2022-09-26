@@ -12,10 +12,6 @@ h1 {
 	-webkit-background-clip: text;
 }
 
-.fa-duotone fa-pen-to-square {
-	background-image: url("/img/modificar.svg");
-	color: red;
-}
 
 table {
 	margin-bottom: 30px;
@@ -157,3 +153,22 @@ ul, ol {
 	right: -46%;
 	top: 0px;
 }
+
+#desc {
+	text-decoration: none;
+	color: black;
+}
+
+#desc:hover {
+	color: #fa4f05;
+}
+
+.pags {
+	text-decoration: none;
+	color: black;
+}
+
+.pags:hover {
+	color: black;
+}
+
