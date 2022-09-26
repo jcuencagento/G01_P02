@@ -2,8 +2,10 @@ package com.grupo01.spring.dao;
 
 import java.util.List;
 
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -64,6 +66,8 @@ public interface GameDAO extends JpaRepository<Game, Long> {
 	 */
 	@Query("from Game where Platform IN ('WII', 'NES', 'GB', 'DS', 'SNES', 'SNES', 'N64','GC','WIIU','DS3')  order by Platform")
 	List<Game> listNintendo();
+
+	Page<Game> findAll(Pageable pageable);
 
 
 	

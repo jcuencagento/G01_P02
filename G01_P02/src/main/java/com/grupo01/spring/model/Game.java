@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.opencsv.bean.CsvBindByName;
+
 /**
  * 
  * @author Grupo01
@@ -23,27 +25,27 @@ import javax.persistence.Table;
 public class Game {
 	
 	@Id
-	@Column(name="id")
+	@CsvBindByName(column="id")
 	private int id;
-	@Column(name="Name")
+	@CsvBindByName(column="Name")
 	private String name;
-	@Column(name="Platform")
+	@CsvBindByName(column="Platform")
 	private String platform;
-	@Column(name="Year")
+	@CsvBindByName(column="Year")
 	private int year;
-	@Column(name="Genre")
+	@CsvBindByName(column="Genre")
 	private String genre;
-	@Column(name="Publisher")
+	@CsvBindByName(column="Publisher")
 	private String publisher;
-	@Column(name="NA_Sales")
+	@CsvBindByName(column="NA_Sales")
 	private double na_Sales;
-	@Column(name="EU_Sales")
+	@CsvBindByName(column="EU_Sales")
 	private double eu_Sales;
-	@Column(name="JP_Sales")
+	@CsvBindByName(column="JP_Sales")
 	private double jp_Sales;
-	@Column(name="Other_Sales")
+	@CsvBindByName(column="Other_Sales")
 	private double other_Sales;
-	@Column(name="Global_Sales")
+	@CsvBindByName(column="Global_Sales")
 	private double global_Sales;
 	
 	public Game() {

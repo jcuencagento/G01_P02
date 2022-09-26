@@ -5,6 +5,15 @@
 <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
 <link rel="stylesheet" th:href="@{/css/estilos.css}" />
 
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ 
+ <script src="//cdn.datatables.net/2.2.9/js/dataTables.responsive.min.js"></script>
+ <script src="./css/table.js"></script>
+ <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+ 
+
 <title>Game Database</title>
 </head>
 
@@ -53,7 +62,8 @@
 			<a href="/new" class="btn btn-primary">New game</a>
 		</p>
 
-		<table class="table table-striped">
+		
+		<table id="listaJuegos" class="display" cellspacing="0" width="100%">
 			<tr>
 				<th>Rank</th>
 				<th>Name</th>
@@ -84,22 +94,21 @@
 
 		</table>
 		
+
 		<nav>
       <ul class="pager">
       
- Actual <span th:text="${gameList.number}+1"></span>página&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
- Total  <span th:text="${gameList.totalPages}"></span>página&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-<a th:href="@{/(pageNum=1)}">Hogar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-    <a th:href="@{/(pageNum= ${gameList.hasPrevious()}?${gameList.getNumber()}:1)}">Pagina anterior</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-    <a th:href="@{/(pageNum= ${gameList.hasNext()}?${gameList.getNumber()}+2:${gameList.totalPages})}">Siguiente página</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
-    <a th:href="@{/(pageNum= ${gameList.totalPages} )}">Última página</a>
-      
-      
-        <!--            <li class = "previous"> <a href = "#" th: href = "@{'/? Page ='+${page.number-1}}" th:unless = "${page.first } "> Previous </a> </li>
-                   <li class = "next"> <a href = "#" th: href = "@{/ (page = ${page.number} +1)}" th:unless = "${page.last}" > Next page </a> </li>--> 
+          Actual <span th:text="${gameList.number}+1"></span>página&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+          Total  <span th:text="${gameList.totalPages}"></span>página&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+          <a th:href="@{/(pageNum=1)}">Hogar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+          <a th:href="@{/(pageNum= ${gameList.hasPrevious()}?${gameList.getNumber()}:1)}">Pagina anterior</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+          <a th:href="@{/(pageNum= ${gameList.hasNext()}?${gameList.getNumber()}+2:${gameList.totalPages})}">Siguiente página</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+          <a th:href="@{/(pageNum= ${gameList.totalPages} )}">Última página</a>
+     
      </ul>
-</nav> 
+  </nav> 
 		
 	</div>
 </body>
 </html>
+

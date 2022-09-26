@@ -1,5 +1,9 @@
 package com.grupo01.spring.control;
 
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.List;
+
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+>
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +19,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.grupo01.spring.model.Game;
 import com.grupo01.spring.service.GameService;
+import com.grupo01.spring.util.CSVHelper;
+import com.grupo01.spring.util.ScriptBBDD;
+
+import net.bytebuddy.TypeCache.Sort;
 
 /**
  * 
@@ -29,6 +39,28 @@ public class GameController {
 
 	@Autowired
 	GameService service;
+	
+	@Autowired
+	ScriptBBDD script;
+	
+	@Autowired
+	CSVHelper csvhelper;
+	
+	//Para cargar CSV Opcion 1:
+	@GetMapping( "/upload1")
+	public String addAllGamesJBDC(Model model) {
+		ScriptBBDD.deCSVaMySQL();
+		return "redirect:/";
+	}
+	
+	//Para cargar CSV Opcion 2:
+	@GetMapping( "/upload2")
+	public String addAllGamesCSVRecord(Model model) {
+		File file = ScriptBBDD.buscar("complete.csv", Paths.get(".").toFile());
+		csvhelper.csvToGames(file);
+		return "redirect:/";
+	}
+	
 
 	///// ---GESTION---///////
 
@@ -43,20 +75,8 @@ public class GameController {
 	 */
 
 	// Indice
-	// @GetMapping({ "/", "/games", "", "%" })
-	// public String listGames(Model model) {
-	// model.addAttribute("gameList", service.findAll());
-	// return "GameList";
-	// }
 
-	//@GetMapping({ "/", "/games", "", "%" })
-	//public String listGames(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
-		//	Model model) {
-		//Page<Game> gameList = service.findAllByPage(PageRequest.of(page, size));
-		// System.out.println("-----CONTROL------" + gameList);
-		//model.addAttribute("gameList", gameList);
-		//return "GameList";
-	//}
+
 
 	@GetMapping("/")
 	public String findByPage(Model model, Integer pageNum) { // Cuando la página actual está
@@ -71,8 +91,16 @@ public class GameController {
 		Pageable pageable = PageRequest.of(pageNum - 1, 100);
 		Page<Game> page = service.findAllByPage(pageable);
 		model.addAttribute("gameList", page);
+
 		return "GameList";
 	}
+	
+	@GetMapping("/page")
+	public ResponseEntity<Page<Game>> getGames(@PageableDefault(page = 0,
+	            size = 30) Pageable pageable) {
+	        Page<Game> games = service.findAll(pageable);
+	        return ResponseEntity.ok(games);
+	    }
 
 
 	/**
@@ -86,7 +114,6 @@ public class GameController {
 
 	@PostMapping("/save")
 	public String saveGame(Game game) {
-		System.out.println("--------------------------" + game.toString());
 		service.save(game);
 		return "redirect:/";
 	}
@@ -106,6 +133,7 @@ public class GameController {
 	public String editGames(@RequestParam("id") long id, Model model) {
 		model.addAttribute("game", service.findById((int) id));
 		System.out.println("--------------------------" + service.findById((int) id).toString());
+
 		return "GameForm";
 	}
 
