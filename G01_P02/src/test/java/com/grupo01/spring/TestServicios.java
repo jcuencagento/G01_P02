@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.grupo01.spring.dao.GameDAO;
 import com.grupo01.spring.model.Game;
 
-import data.ListadoJuegos;
-import model.Juegos;
-import util.ExcepcionJuegoSinNombre;
+//import data.ListadoJuegos;
+//import model.Juegos;
+//import util.ExcepcionJuegoSinNombre;
 
 
 /**
@@ -75,15 +73,15 @@ public class TestServicios {
 	 * y comprobamos que una lista vacia y una queriendo sumar un juego vacio es lo mismo.
 	 * 
 	 */
-	@Test
-	public void testListarVacio() {
-		logger.warn("Test::testListarVacio(): List<Game>");
+	//@Test
+	//public void testListarVacio() {
+		//logger.warn("Test::testListarVacio(): List<Game>");
 		
-		GameDAO gameDAO=new GameDAO();
-		List<Game> listaJuegos1 = null;
+		//GameDAO gameDAO=new GameDAO();
+		//List<Game> listaJuegos1 = null;
 		
-		Assert.assertEquals(listaJuegos1,gameDAO.findAll());
-	}
+		//Assert.assertEquals(listaJuegos1,gameDAO.findAll());
+	//}
 
 	
 }
